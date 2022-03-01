@@ -4062,7 +4062,6 @@ extension Strings {
             comment: "Text of a button to encourage user to enable Apple notification system."
         )
         
-        
         public static let noDataCalloutBody = NSLocalizedString(
             "privacyHub.noDataCalloutBody",
             bundle: .braveShared,
@@ -4087,8 +4086,8 @@ extension Strings {
         public static let mostFrequentTrackerAndAdBody = NSLocalizedString(
             "privacyHub.",
             bundle: .braveShared,
-            value: "%@ was blocked by Brave Shields on %lld sites",
-            comment: "It says which tracker was blocked on how many websites, example usage: 'Google Analytics was blocked by Brave Shields on 42 sites'"
+            value: "**%@** was blocked by Brave Shields on **%lld** sites",
+            comment: "Do NOT localize asterisk('*') characters, they are used to make the text bold in the app. It says which tracker was blocked on how many websites, example usage: 'Google Analytics was blocked by Brave Shields on 42 sites'"
         )
         
         public static let noDataToShow = NSLocalizedString(
@@ -4108,8 +4107,8 @@ extension Strings {
         public static let riskiestWebsiteBody = NSLocalizedString(
             "privacyHub.riskiestWebsiteBody",
             bundle: .braveShared,
-            value: "%@ had an average of %lld trackers & ads blocked per visit",
-            comment: "It says which website had the most tracker per visit, example usage: 'example.com had an average of 10 trackers & ads blocked per visit '"
+            value: "**%@** had an average of **%lld** trackers & ads blocked per visit",
+            comment: "Do NOT localize asterisk('*') characters, they are used to make the text bold in the app. It says which website had the most tracker per visit, example usage: 'example.com had an average of 10 trackers & ads blocked per visit '"
         )
         
         public static let vpnAlertsHeader = NSLocalizedString(
