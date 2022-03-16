@@ -127,7 +127,8 @@ class UserScriptManager {
     isPaymentRequestEnabled: Bool,
     isWebCompatibilityMediaSourceAPIEnabled: Bool,
     isMediaBackgroundPlaybackEnabled: Bool,
-    isNightModeEnabled: Bool
+    isNightModeEnabled: Bool,
+    walletProviderJS: String?
   ) {
     self.tab = tab
     self.isFingerprintingProtectionEnabled = isFingerprintingProtectionEnabled
@@ -137,7 +138,7 @@ class UserScriptManager {
     self.isPlaylistEnabled = true
     self.isMediaBackgroundPlaybackEnabled = isMediaBackgroundPlaybackEnabled
     self.isNightModeEnabled = isNightModeEnabled
-
+    self.walletProviderJS = walletProviderJS
     reloadUserScripts()
   }
 
@@ -376,6 +377,8 @@ class UserScriptManager {
                         in: .page)
   }()
 
+    private var walletProviderJS: String?
+    
   private func reloadUserScripts() {
     tab?.webView?.configuration.userContentController.do {
       $0.removeAllUserScripts()
@@ -422,6 +425,9 @@ class UserScriptManager {
             
             if let script = walletProviderScript {
                 $0.addUserScript(script)
+                if let providerJS = walletProviderJS {
+                    $0.addUserScript(.init(source: providerJS, injectionTime: .atDocumentStart, forMainFrameOnly: true, in: .page))
+                }
             }
     }
   }
