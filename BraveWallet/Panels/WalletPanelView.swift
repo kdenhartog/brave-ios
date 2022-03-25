@@ -105,6 +105,14 @@ public struct WalletPanelContainerView: View {
             }
           )
           .transition(.asymmetric(insertion: .identity, removal: .opacity))
+          .onChange(of: cryptoStore.pendingWebpageRequest) { newValue in
+            if newValue != nil {
+              presentWalletWithContext?(.webpageRequests)
+            }
+          }
+          .onAppear {
+            cryptoStore.fetchPendingRequests()
+          }
         }
       case .unlock:
         lockedView
@@ -319,8 +327,8 @@ struct WalletPanelView_Previews: PreviewProvider {
         presentWalletWithContext: { _ in }
       )
     }
-    .fixedSize(horizontal: false, vertical: true)
-    .previewLayout(.sizeThatFits)
+      .fixedSize(horizontal: false, vertical: true)
+      .previewLayout(.sizeThatFits)
   }
 }
 #endif
