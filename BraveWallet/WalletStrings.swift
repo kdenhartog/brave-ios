@@ -1968,5 +1968,19 @@ extension Strings {
       value: "View the addresses of your permitted accounts (required)",
       comment: "A text displayed below the account address in new site connection confirmation step, in order to make sure users double check the account address they are going to allow the dapp to connect with."
     )
+    public static let addSuggestedTokenTitle = NSLocalizedString(
+      "wallet.addSuggestedTokenTitle",
+      tableName: "BraveWallet",
+      bundle: .braveWallet,
+      value: "Add Suggested Token",
+      comment: "The title of the view shown over a dapps website that requests the user add / approve a new token."
+    )
+    public static let addSuggestedTokenSubtitle = NSLocalizedString(
+      "wallet.addSuggestedTokenSubtitle",
+      tableName: "BraveWallet",
+      bundle: .braveWallet,
+      value: "Would you like to import this token?",
+      comment: "The subtitle of the view shown over a dapps website that requests the user add / approve a new token, explaining to the user what this request does."
+    )
   }
 }
