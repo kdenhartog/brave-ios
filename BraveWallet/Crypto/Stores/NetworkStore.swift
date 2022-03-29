@@ -34,9 +34,7 @@ public class NetworkStore: ObservableObject {
     self.rpcService = rpcService
     self.updateChainList()
     rpcService.chainId { chainId in
-      let id = chainId.isEmpty ? BraveWallet.MainnetChainId : chainId
-      self.selectedChainId = id
-      self.rpcService.setNetwork(id) { _ in }
+      self.selectedChainId = chainId.isEmpty ? BraveWallet.MainnetChainId : chainId
     }
     rpcService.add(self)
   }
@@ -50,6 +48,7 @@ public class NetworkStore: ObservableObject {
   }
 
   func setSelectedChain(chainId: String) {
+    guard self.selectedChainId != chainId else { return }
     self.selectedChainId = chainId
     self.rpcService.setNetwork(chainId) { _ in }
   }
