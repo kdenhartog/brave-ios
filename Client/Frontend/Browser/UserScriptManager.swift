@@ -377,7 +377,7 @@ class UserScriptManager {
                         in: .page)
   }()
 
-    private var walletProviderJS: String?
+  private var walletProviderJS: String?
     
   private func reloadUserScripts() {
     tab?.webView?.configuration.userContentController.do {
@@ -422,13 +422,13 @@ class UserScriptManager {
       if let domainUserScript = domainUserScript, let script = domainUserScript.script {
         $0.addUserScript(script)
       }
-            
-            if let script = walletProviderScript {
-                $0.addUserScript(script)
-                if let providerJS = walletProviderJS {
-                    $0.addUserScript(.init(source: providerJS, injectionTime: .atDocumentStart, forMainFrameOnly: true, in: .page))
-                }
-            }
+
+      if let script = walletProviderScript {
+        $0.addUserScript(script)
+        if let providerJS = walletProviderJS {
+          $0.addUserScript(.init(source: providerJS, injectionTime: .atDocumentStart, forMainFrameOnly: true, in: .page))
+        }
+      }
     }
   }
 }
