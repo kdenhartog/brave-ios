@@ -48,7 +48,7 @@ protocol TopToolbarDelegate: AnyObject {
   func topToolbarDidPressStop(_ urlBar: TopToolbarView)
   func topToolbarDidPressReload(_ urlBar: TopToolbarView)
   func topToolbarDidPressQrCodeButton(_ urlBar: TopToolbarView)
-    func topToolbarDidTapWalletButton(_ urlBar: TopToolbarView)
+  func topToolbarDidTapWalletButton(_ urlBar: TopToolbarView)
 }
 
 class TopToolbarView: UIView, ToolbarProtocol {
