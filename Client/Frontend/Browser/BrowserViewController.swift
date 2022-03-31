@@ -387,6 +387,7 @@ class BrowserViewController: UIViewController, BrowserViewControllerDelegate {
     screenshotHelper = ScreenshotHelper(tabManager: tabManager)
     tabManager.addDelegate(self)
     tabManager.addNavigationDelegate(self)
+    #if WALLET_DAPPS_ENABLED
     tabManager.makeWalletProvider = { [weak self] tab in
       guard let self = self,
             let provider = self.braveCore.walletProvider(with: self, isPrivateBrowsing: tab.isPrivate) else {
@@ -394,6 +395,7 @@ class BrowserViewController: UIViewController, BrowserViewControllerDelegate {
       }
       return (provider, js: self.braveCore.walletProviderJS)
     }
+    #endif
     downloadQueue.delegate = self
 
     // Observe some user preferences
