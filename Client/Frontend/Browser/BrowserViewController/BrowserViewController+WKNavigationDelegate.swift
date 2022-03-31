@@ -482,6 +482,10 @@ extension BrowserViewController: WKNavigationDelegate {
       }
 
       tabsBar.reloadDataAndRestoreSelectedTab()
+      
+      if tab.walletProvider != nil {
+        tab.emitEthereumEvent(.connect)
+      }
     }
 
     // Cosmetic Filters
