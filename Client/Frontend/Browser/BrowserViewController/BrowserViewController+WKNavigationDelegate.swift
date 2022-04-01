@@ -185,6 +185,25 @@ extension BrowserViewController: WKNavigationDelegate {
     let isPrivateBrowsing = PrivateBrowsingManager.shared.isPrivateBrowsing
     let tab = tabManager[webView]
 
+    let domainForRequestURL = Domain.getOrCreate(
+      forUrl: url,
+      persistent: !isPrivateBrowsing
+    )
+
+    // Debouncing logic
+    // Handle debouncing for main frame only
+    if domainForRequestURL.isShieldExpected(.AdblockAndTp, considerAllShieldsOption: true),
+       navigationAction.targetFrame?.isMainFrame == true,
+       let redirectURL = DebouncingResourceDownloader.shared.redirectURL(for: url) {
+      // Cancel the original request. We don't want it to load as it's tracking us
+      decisionHandler(.cancel, preferences)
+
+      // We instead go directly to the redirect request
+      var modifiedRequest = navigationAction.request
+      modifiedRequest.url = redirectURL
+      tab?.loadRequest(modifiedRequest)
+    }
+
     // Check if custom user scripts must be added to or removed from the web view.
     tab?.userScriptManager?.userScriptTypes = UserScriptHelper.getUserScriptTypes(
       for: navigationAction, options: isPrivateBrowsing ? .privateBrowsing : .default
