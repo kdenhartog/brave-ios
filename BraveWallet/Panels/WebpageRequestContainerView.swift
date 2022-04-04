@@ -14,11 +14,25 @@ struct WebpageRequestContainerView<DismissContent: ToolbarContent>: View {
   @ObservedObject var cryptoStore: CryptoStore
   var toolbarDismissContent: DismissContent
   
+  var onDismiss: () -> Void
+  
   var body: some View {
     UIKitNavigationView {
       Group {
         if let pendingRequest = cryptoStore.pendingWebpageRequest {
-
+          switch pendingRequest {
+          case let .signMessage(request):
+            SignatureRequestView(
+              request: request,
+              keyringStore: keyringStore,
+              onDismiss: { approved in
+                cryptoStore.handleWebpageRequestResponse(.signMessage(approved: approved, id: request.id))
+                onDismiss()
+              }
+            )
+          default:
+            EmptyView()
+          }
         }
       }
       .toolbar {

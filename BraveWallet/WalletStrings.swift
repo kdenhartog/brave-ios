@@ -1968,5 +1968,26 @@ extension Strings {
       value: "View the addresses of your permitted accounts (required)",
       comment: "A text displayed below the account address in new site connection confirmation step, in order to make sure users double check the account address they are going to allow the dapp to connect with."
     )
+    public static let signatureRequestTitle = NSLocalizedString(
+      "wallet.signatureRequestTitle",
+      tableName: "BraveWallet",
+      bundle: .braveWallet,
+      value: "Signature Requested",
+      comment: "A title of the view shown over a dapps website that requests the user sign a message."
+    )
+    public static let signatureRequestSubtitle = NSLocalizedString(
+      "wallet.signatureRequestSubtitle",
+      tableName: "BraveWallet",
+      bundle: .braveWallet,
+      value: "Your signature is being requested",
+      comment: "A subtitle of the view shown over a dapps website that requests the user sign a message."
+    )
+    public static let sign = NSLocalizedString(
+      "wallet.sign",
+      tableName: "BraveWallet",
+      bundle: .braveWallet,
+      value: "Sign",
+      comment: "The title of the button used to sign a message request on the signature request view."
+    )
   }
 }

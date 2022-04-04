@@ -128,6 +128,19 @@ extension BraveWallet.NetworkInfo: Identifiable {
   }
 }
 
+extension BraveWallet.SignMessageRequest {
+  static var previewRequest: BraveWallet.SignMessageRequest {
+    .init(
+      id: 1,
+      address: "",
+      message: "To avoid digital cat burglars, sign below to authenticate with CryptoKitties.",
+      isEip712: false,
+      domainHash: "",
+      primaryHash: ""
+    )
+  }
+}
+
 extension BraveWallet.BlockchainToken: Identifiable {
   public var id: String {
     symbol.lowercased()
