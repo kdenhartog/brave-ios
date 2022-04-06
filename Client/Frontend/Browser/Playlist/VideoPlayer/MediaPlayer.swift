@@ -652,7 +652,23 @@ extension AVPlayerItem {
       return true  // Assume video
     }
     
-    return (tracks.filter({ $0.assetTrack?.mediaType == .video }).isEmpty == false) || asset.isVideoTracksAvailable()
+    // If the only current track types are audio
+    if !tracks.allSatisfy({ $0.assetTrack?.mediaType == .audio }) {
+      return true  // Assume video
+    }
+    
+    let hasVideoTracks = (tracks.filter({ $0.assetTrack?.mediaType == .video }).isEmpty == false) || asset.isVideoTracksAvailable()
+    
+    // Ultra hack
+    // Some items `fade` in/out or have an audio track that fades out but no video track
+    // In this case, assume video as it is potentially still a video, just with blank frames
+    if !hasVideoTracks &&
+        currentTime().seconds <= 1.0 ||
+        fabs(duration.seconds - currentTime().seconds) <= 3.0 {
+      return true
+    }
+    
+    return hasVideoTracks
   }
 }
 
