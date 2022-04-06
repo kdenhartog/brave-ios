@@ -166,7 +166,7 @@ class SendSwapStoreTests: XCTestCase {
     let ex = expectation(description: "make-erc20-eip1559-swap-transaction")
     store.setUpTest()
     store.state = .lowAllowance("test-spender-address")
-    store.prepareSwap()
+    store.prepareSwap { _ in }
     DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
       if case .swap = store.state {
         ex.fulfill()
@@ -196,7 +196,7 @@ class SendSwapStoreTests: XCTestCase {
 
     rpcService.setNetwork(BraveWallet.RopstenChainId) { success in
       XCTAssertTrue(success)
-      store.prepareSwap()
+      store.prepareSwap { _ in }
       DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
         if case .swap = store.state {
           ex.fulfill()
@@ -223,7 +223,7 @@ class SendSwapStoreTests: XCTestCase {
     let ex = expectation(description: "make-eth-swap-eip1559-transaction")
     store.setUpTest()
     store.state = .swap
-    store.prepareSwap()
+    store.prepareSwap { _ in }
     DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
       if case .swap = store.state {
         ex.fulfill()
@@ -253,7 +253,7 @@ class SendSwapStoreTests: XCTestCase {
 
     rpcService.setNetwork(BraveWallet.RopstenChainId) { success in
       XCTAssertTrue(success)
-      store.prepareSwap()
+      store.prepareSwap { _ in }
       DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
         if case .swap = store.state {
           ex.fulfill()
